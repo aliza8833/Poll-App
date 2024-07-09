@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
+import { StyleSheet, Text, View,FlatList } from 'react-native';
+import{Link} from 'expo-router'
+import {Stack} from 'expo-router';
+import { AntDesign } from '@expo/vector-icons';
+const polls =[{id:1},{id:2},{id:3}];
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+    <Stack.Screen options={{title:'Polls', headerTitleAlign:'center',headerRight:()=>(<Link href={"/polls/new"} ><AntDesign name="plus" size={20} color="gray" /></Link>),}}/>
+<FlatList
+data={polls}
+contentContainerStyle={styles.container}
+renderItem={({item})=>(
+  <Link  href ={`/polls/${item.id}`} style={styles.pollContainer}> 
+    <Text style={styles.pollTitle}>{item.id}: Example poll question</Text>
+  </Link>
+)}
+/>
+</>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+container: {
+flex: 1,
+padding:10,
+gap:5,
   },
+pollContainer:{
+  backgroundColor: 'white',
+  padding:10,
+  borderRadius:5,
+ 
+},
+pollTitle:{
+fontWeight:'bold',
+fontSize:16,
+},
 });
