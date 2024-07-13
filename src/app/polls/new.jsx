@@ -16,7 +16,7 @@ console.warn('create')
 <Text style={styles.label}>Options</Text>
 
 {options.map((option,index) =>(
-   <View style={{justifyContent:'center'}}>
+   <View key={index} style={{justifyContent:'center'}}>
     <TextInput value={option}
     onChangeText={(text)=>{
         const updated = [...options];
