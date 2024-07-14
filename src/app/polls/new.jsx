@@ -1,6 +1,6 @@
 import {Stack,Redirect,router} from 'expo-router'
 import {useState} from 'react'
-import {View,Text ,TextInput,StyleSheet,Button}from 'react-native';
+import {View,Text ,TextInput,StyleSheet,Button,Alert}from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useAuth } from '../../providers/AuthProvider';
 import {supabase} from '../../lib/supabase';
