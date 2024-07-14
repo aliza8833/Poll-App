@@ -6,6 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import {useState,useEffect} from 'react';
 import {supabase} from '../lib/supabase';
 import {Poll} from '../types/db'
+import { ScrollView } from 'react-native';
 export default function HomeScreen() {
 const [polls,setPolls] = useState<Poll[]>([]);
   useEffect(()=>{
@@ -33,15 +34,18 @@ headerRight:()=>(<Link href={"/polls/new"} ><AntDesign name="plus" size={20} col
 headerLeft:()=>(<Link href={"./profile"} ><AntDesign name="user" size={20} color="gray" /></Link>)
 
 }}/>
+
 <FlatList
 data={polls}
 contentContainerStyle={styles.container}
+keyExtractor={(item) => item.id.toString()}
 renderItem={({item})=>(
   <Link  href ={`/polls/${item.id}`} style={styles.pollContainer}> 
     <Text style={styles.pollTitle}> {item.question}</Text>
   </Link>
 )}
 />
+
 </>
   );
 }
