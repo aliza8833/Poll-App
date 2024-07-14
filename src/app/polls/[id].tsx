@@ -1,18 +1,40 @@
 import {useLocalSearchParams} from 'expo-router';
-import {View,Text,StyleSheet,Pressable,Button} from 'react-native';
+import {Alert,View,Text,StyleSheet,Pressable,Button, ActivityIndicator} from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import {Stack} from 'expo-router'
-const poll ={
-    question:'React Native vs Flutter?',
-    options:['React Native FTW','Flutter','SwiftUI'],
-};
+import {Poll} from '../../types/db'
+import { supabase } from '../../lib/supabase';
 export default function PollDetails(){
     const[selected,setSelected] = useState('React Native FTW');
+
     const{id} = useLocalSearchParams<{id:string}>();
+    const [poll,setPoll] = useState<Poll>(null);
+    useEffect(()=>{
+        const fetchPolls = async() => {
+          console.log('Fetching...');
+          
+    let { data , error } = await supabase
+    .from('polls')
+    .select('*')
+    .eq('id',Number.parseInt(id))
+    .single()
+       if(error)  {
+        Alert.alert('Error fetching data');
+       } 
+       setPoll(data); 
+        };
+        fetchPolls();
+    
+      },[]);
+
     const vote=()=>{
         console.warn('Vote',selected)
     }
+if(!poll){
+    return <ActivityIndicator/>
+}
+
     return(
     <View style={styles.container}>
         <Stack.Screen options={{title :'Poll voting'}}/>
