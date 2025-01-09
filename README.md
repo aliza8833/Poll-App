@@ -30,5 +30,5 @@ Votes: Store user votes for each poll.
 Users: Use Supabase's built-in authentication to store user info (if needed).
 Get your Supabase URL and Supabase API key from the Supabase project dashboard.
 
-![Poll app](https://github.com/aliza8833/Poll-App/commit/fe1b7f0e087d04fe9d0ed4b8a507298168501d9f)
+![Poll app](https://github.com/aliza8833/Poll-App/blob/main/Poll%20App.jpg)
 
